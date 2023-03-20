@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding: 2px 0 2px 0 ;
+  }
+  
+  .container label {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #313131;
+  }
+  
+  .container input {
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+    outline: none;
+    padding: 10px 15px;
+    color: #000;
+  }
+  
+  .container input:hover {
+    border-color: #ccc;
+  }
+  
+  .container input:focus {
+    border-color: #9900ff;
+  }
+/* --------------- */
+
+.container-out {
+    height: 100%;
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(to right, #9900ff, #cc80ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .innerBox {
+    min-width: 480px;
+    height: fit-content;
+    width: fit-content;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    /* padding: 30px; */
+    padding: 30px 0 30px 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .footer .error {
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: #ff3300;
+    text-align: center;
+  }
+  
+  .footer button {
+    outline: none;
+    border: none;
+    background-color: #9900ff;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px 16px;
+    width: 100%;
+    transition: 100ms;
+    cursor: pointer;
+  }
+  
+  .footer button:disabled {
+    background-color: gray !important;
+  }
+  
+  .footer button:hover {
+    background-color: #aa2aff;
+  }
+  
+  .footer p {
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .footer p span a {
+    font-weight: bold;
+    color: #9900ff;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    text-decoration: none;
+  }  
+
+  .or { 
+     margin: 0;
+  }
+
+  .form-control  {
+    width: 100%;
+  }

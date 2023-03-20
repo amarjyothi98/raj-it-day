@@ -3,6 +3,8 @@ import { auth } from '../../constants/firebase'
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from '@firebase/auth'
 import {collection, ref,addDoc} from 'firebase/firestore'
 import { db } from '../../constants/firebase'
+import './auth.css'
+
 function Register() {
     const [obj, setObj] = useState({
         email: '',
@@ -82,34 +84,50 @@ function Register() {
     }
     return (
         (isLoaded)?
-        <form className='w-50 mx-auto'>
-            <div className="form-group">
-                <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name='name' id="exampleFormControlInput1" placeholder="e.g., Ram Goel" />
-            </div>
-            <div className="form-group">
-                <input required onChange={(e) => handleChange(e)} type="email" className="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com" />
-            </div>
-            <div className="form-group">
-                <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name="phone" id="exampleFormControlInput1" placeholder="+91 6320200" />
-            </div>
-            <div className="form-group">
-                <select className="form-control" onChange={(e) => handleChange(e)} id="exampleFormControlSelect1" name="role">
-                    <option>Government Official</option>
-                    <option>Government Intern</option>
 
-                </select>
-            </div>
-            <div className="form-group">
-                <input required onChange={(e) => handleChange(e)} type="text" name="uniqueCode" className="form-control" id="exampleFormControlInput1" placeholder="e.g., x8929b9oeb922" />
-            </div>
-            <div className="form-group">
-                <input required onChange={(e) => handleChange(e)} type="password" className="form-control" name="password" id="exampleFormControlInput1" placeholder="Password" />
+        <div className="container-out">
+            <div className="innerBox">
+
+                <h1 className='heading'> Register Yourself </h1>
+
+                <form className='w-50 mx-auto'>
+                    <div className="form-group container">
+                        <input required onChange={(e) => handleChange(e)} type="text" className="form-" name='name' id="exampleFormControlInput1" placeholder="Your Name" />
+                    </div>
+                    <div className="form-group container">
+                        <input required onChange={(e) => handleChange(e)} type="email" className="form-control" name="email" id="exampleFormControlInput1" placeholder="Your Email" />
+                    </div>
+                    <div className="form-group container">
+                        <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name="phone" id="exampleFormControlInput1" placeholder="Number" />
+                    </div>
+                    <div className="form-group container">
+                        <select className="form-control" onChange={(e) => handleChange(e)} id="exampleFormControlSelect1" name="role">
+                            <option>Government Official</option>
+                            <option>Government Intern</option>
+
+                        </select>
+                    </div>
+                    <div className="form-group container">
+                        <input required onChange={(e) => handleChange(e)} type="text" name="uniqueCode" className="form-control" id="exampleFormControlInput1" placeholder="Your Unique ID" />
+                    </div>
+                    <div className="form-group container">
+                        <input required onChange={(e) => handleChange(e)} type="password" className="form-control" name="password" id="exampleFormControlInput1" placeholder="Password" />
+                    </div>
+                    <div className="footer">
+
+                        <button onClick={handleSubmit} className='btn btn-primary w-100'>Register</button>
+                        <p className='or' >or</p>
+                        <button onClick={googleLogin} className='btn btn-primary w-100 my-2'>Signup with Google</button>
+                        <p className="alert error">{err}</p>
+
+                    </div>
+                </form>
+
             </div>
 
-            <button onClick={handleSubmit} className='btn btn-primary w-100'>Register</button>
-            <button onClick={googleLogin} className='btn btn-primary w-100 my-2'>Signup with Google</button>
-            <p className="alert">{err}</p>
-        </form>:<i className='fa fa-spinner fa-spin'></i>
+        </div>
+
+            :<i className='fa fa-spinner fa-spin'></i>
     )
 }
 

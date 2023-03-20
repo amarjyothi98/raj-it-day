@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {signInWithEmailAndPassword, signInWithPopup,GoogleAuthProvider } from "firebase/auth";
 import { auth } from '../../constants/firebase';
+import './auth.css'
 
 function Login() {
     const [obj, setObj] = useState({
@@ -49,8 +50,10 @@ function Login() {
     }
     return (
         <div>
-            <input type="text" onChange={(e) => handleChange(e)} name="email" placeholder='email' />
-            <input type="password" onChange={(e) => handleChange(e)} name="password" placeholder='password' />
+            <div className="container">
+                <input type="text" onChange={(e) => handleChange(e)} name="email" placeholder='email' />
+                <input type="password" onChange={(e) => handleChange(e)} name="password" placeholder='password' />
+            </div>
             <button onClick={(e)=>handleSubmit(e)}>Login</button>
             <button onClick={(e)=>googleLogin(e)}>Sign in with Google</button>
             <p>{err}</p>
