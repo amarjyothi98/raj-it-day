@@ -85,13 +85,7 @@ function Register() {
                     <div className="form-group container">
                         <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name="phone" id="exampleFormControlInput1" placeholder="Number" />
                     </div>
-                    <div className="form-group container">
-                        <select className="form-control" onChange={(e) => handleChange(e)} id="exampleFormControlSelect1" name="role">
-                            <option>Government Official</option>
-                            <option>Government Intern</option>
-
-                        </select>
-                    </div>
+                    
                     <div className="form-group container">
                         <input required onChange={(e) => handleChange(e)} type="text" name="uniqueCode" className="form-control" id="exampleFormControlInput1" placeholder="Your Unique ID" />
                     </div>

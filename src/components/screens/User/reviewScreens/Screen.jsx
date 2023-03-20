@@ -10,13 +10,13 @@ function Screen(props) {
           return (
             <div className='bg-white border rounded p-3 my-2 d-flex flex-wrap justify-content-between align-items-center'>
               <label htmlFor="">{e.label}</label>
-              {(e.options.length)?<select name="review" id="" className='p-1 border rounded' onChange={props.onChange} required>
+              {(e.options.length)?<select name={e.label} id="" className='p-1 border rounded' onChange={props.onChange} required>
                 {
                   e.options.map(k => {
                     return <option value={k}>{k}</option>
                   })
                 }
-              </select>:<input name={e.label} className='form-control my-1' onChange={props.onChange} placeholder='Answer' />}
+              </select>:<input name={"review"} className='form-control my-1' onChange={props.onChange} placeholder='Answer' />}
             </div>
           )
         })

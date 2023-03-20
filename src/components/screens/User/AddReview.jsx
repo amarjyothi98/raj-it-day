@@ -61,8 +61,9 @@ function AddReview() {
         setIsLoaded(false)
         var dt = new Date()
         await addDoc(collection(db, 'reviews'), {
-            name: auth.currentUser.name + `- ${dt.getHours()}:${dt.getMinutes()}:${dt.getSeconds()}`,
-            from:auth.currentUser.email,
+            name: auth.currentUser.displayName || "test",
+            from:auth.currentUser.email || "test@gmail.com",
+            date:dt.toDateString(),
             data: data
         }).then(e => {
             navigate('/confirm')
@@ -82,8 +83,7 @@ function AddReview() {
                 {(active === 2) ? <Screen onChange={(e) => handleChange(e)} data={[option[2], option[3]]} active={2} setActive={(val) => setActive(val)} /> : null}
                 {(active === 3) ? <Screen onChange={(e) => handleChange(e)} data={[option[4], option[5]]} active={3} setActive={(val) => setActive(val)} /> : null}
                 {(active === 4) ? <Screen onChange={(e) => handleChange(e)} data={[option[6], option[7]]} active={4} setActive={(val) => setActive(val)} /> : null}
-                {(active > 4) ? <p>Please Submit</p> : null}
-                <button disabled={active <= 4} className="btn btn-primary my-2 w-100" onClick={() => handleSubmit()}>Submit</button>
+                {(active > 4) && <button  className="btn btn-primary my-2 w-100" onClick={() => handleSubmit()}>Submit</button>}
                 {err}
             </div>:<Loader/>}
         </div>

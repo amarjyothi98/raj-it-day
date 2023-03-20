@@ -1,94 +1,85 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import '../../../index.css'
 import Footer from '../../footer/Footer'
 import Navbar from '../../navbar/Navbar'
-
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../../constants/firebase'
 export default function Home() {
+  var [data, setData] = useState([])
+  useEffect(e => {
+    async function loadReviews() {
+      const querySnapshot = await getDocs(collection(db, "reviews"));
+      let data1 = []
+      querySnapshot.forEach((doc) => {
+        data1.push(doc.data())
+        console.log(doc.data())
+      });
+      setData(data1)
+    }
+
+    loadReviews()
+  }, [])
   return (
     <>
-    <Navbar/>
+      <Navbar />
 
-    <section class="course">
-      <h1>What is Malnutrition?</h1>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo consequuntur esse, illo aspernatur deserunt tempore, provident quos accusamus, sit nulla nam quisquam vitae.</p>
+      <section className="course" id='home'>
+       
 
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="/turtle.jpg" alt="First slide"/>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="/horse.jpg" alt="Second slide"/>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="/cisco.jpg" alt="Third slide"/>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-      <div class="row">
-        <div class="course-col">
-          <h3>Lorem, ipsum.</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis impedit veniam nihil aliquam, ducimus quo mollitia consequatur animi fuga totam eveniet alias similique voluptatem eos. Aliquam facilis id culpa rem architecto nemo maiores illum natus debitis? Voluptatem, commodi! Quos neque quas cumque dolorem dolore libero dignissimos sunt voluptatum quidem laboriosam!</p>
-        </div>
-        <div class="course-col">
-          <h3>Lorem, ipsum.</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis impedit veniam nihil aliquam, ducimus quo mollitia consequatur animi fuga totam eveniet alias similique voluptatem eos. Aliquam facilis id culpa rem architecto nemo maiores illum natus debitis? Voluptatem, commodi! Quos neque quas cumque dolorem dolore libero dignissimos sunt voluptatum quidem laboriosam!</p>
-        </div>
-        <div class="course-col">
-          <h3>Lorem, ipsum dolor.</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis impedit veniam nihil aliquam, ducimus quo mollitia consequatur animi fuga totam eveniet alias similique voluptatem eos. Aliquam facilis id culpa rem architecto nemo maiores illum natus debitis? Voluptatem, commodi! Quos neque quas cumque dolorem dolore libero dignissimos sunt voluptatum quidem laboriosam!</p>
-        </div>
-      </div>
-        
-    </section>
-
-    <section class="testimonials">
-      <h1>Reviews which helped us to save.</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur reiciendis quidem voluptate officiis modi? Nulla rerum deleniti quos distinctio perspiciatis facere accusamus molestias.</p>
-
-      <div class="row">
-        <div class="testimonial-col">
-          <img src="/turtle.jpg" alt=' ' className='test-img' />
-          <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui rem ratione corrupti delectus quia commodi consequatur repudiandae, impedit et natus repellat itaque sequi. Similique sapiente dolore adipisci consequuntur, quis error?</p>
-            <h3>Harshit Kandu</h3>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-o"></i>
+        <img className="d-block w-100 mb-3" style={{ borderRadius: '50px' }} src="https://w.ndtvimg.com/sites/3/2019/12/04120239/malnutrition-in-india-660.png" alt="First slide" />
+        <h1>What is Malnutrition?</h1>
+        <p>Malnutrition is the condition that develops when the body is deprived of vitamins, minerals and other nutrients it needs to maintain healthy tissues and organ function. Malnutrition occurs in people who are either undernourished or overnourished.</p>
+        <div className="row">
+          <div className="course-col">
+            <h3>Causes</h3>
+            <p>The possible causes of malnutrition could be unsuitable dietary choices
+              ,having a low income
+              ,difficulty obtaining food
+              ,various physical and mental health conditions</p>
+          </div>
+          <div className="course-col">
+            <h3>Symptoms</h3>
+            <p>weight loss, a lack of appetite or interest in food or drink, tiredness and irritability, an inability to concentrate, always feeling cold, depression, getting sick and taking longer to heal
+longer healing time for wounds</p>
+          </div>
+          <div className="course-col">
+            <h3>Treatment</h3>
+            <p>ongoing screening and monitoring
+making a dietary plan, which might include taking supplements
+treating specific symptoms,any infections that may be present
+checking for any mouth or swallowing problems
+suggesting alternative eating utensils</p>
           </div>
         </div>
-        <div class="testimonial-col">
-          <img src="/turtle.jpg" alt=' ' className='test-img' />
-          <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui rem ratione corrupti delectus quia commodi consequatur repudiandae, impedit et natus repellat itaque sequi. Similique sapiente dolore adipisci consequuntur, quis error?</p>
-            <h3>Priyankar Dutta</h3>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-o"></i>
-          </div>
+
+      </section>
+
+      <section className="testimonials" id="review">
+        <h1>Reviews which helped us to save.</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur reiciendis quidem voluptate officiis modi? Nulla rerum deleniti quos distinctio perspiciatis facere accusamus molestias.</p>
+
+        <div className="row">
+
+          {
+            data.map((obj, count) => {
+              return (
+                (count < 2) ? <div className="testimonial-col">
+                  <div>
+                    <p>{obj.data.review}</p>
+                    <h3>{obj.name}</h3>
+                    <p>{obj.date}</p>
+                  </div>
+                </div> : null
+              )
+            })
+          }
         </div>
-      </div>
+        <Link to="/login"><p className=''>Want to Add Yours, Click here</p></Link>
 
-    </section>
+      </section>
 
-    <Footer/>
+      <Footer />
     </>
   )
 }
