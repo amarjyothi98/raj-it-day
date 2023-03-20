@@ -46,6 +46,7 @@ nav img {
 .nav-links {
     flex: 1;
     text-align: right;
+
 }
 .nav-links ul li {
     list-style: none;
@@ -121,7 +122,7 @@ nav .fa {
     .nav-links {
         position: absolute;
         background: #ffffff;
-        height: 100vh;
+        border-radius: 20px;
         width: 200px;
         top: 0;
         right: -200px;
