@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { auth } from '../../constants/firebase'
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from '@firebase/auth'
-import {collection, ref,addDoc} from 'firebase/firestore'
+import { collection, ref, addDoc } from 'firebase/firestore'
 import { db } from '../../constants/firebase'
 import './auth.css'
 
@@ -26,9 +26,10 @@ function Register() {
         console.log(obj)
     }
 
-     function handleSubmit(e) {
-         e.preventDefault()
-         if (obj.password.length < 6) {
+    function handleSubmit(e) {
+        e.preventDefault()
+        setErr('')
+        if (obj.password.length < 6) {
             alert("Min 6 length Password Required")
             return;
         }
@@ -38,16 +39,17 @@ function Register() {
         }
         setIsLoaded(false)
         createUserWithEmailAndPassword(auth, obj.email, obj.password)
-            .then(async(userCredential) => {
-                await addDoc(collection(db, 'messages'),{
-                    email:obj.email,
-                    password:obj.password,
-                    name:obj.name,
-                    uniqueCode:obj.uniqueCode,
-                    phone:obj.phone,
-                    role:obj.role
-                }).then(e=>{
+            .then(async (userCredential) => {
+                await addDoc(collection(db, 'users'), {
+                    email: obj.email,
+                    password: obj.password,
+                    name: obj.name,
+                    uniqueCode: obj.uniqueCode,
+                    phone: obj.phone,
+                    role: obj.role
+                }).then(e => {
                     alert("Welcome", obj.name);
+                    localStorage.setItem('appUser', obj.name)
                     setIsLoaded(true)
                 })
             })
@@ -69,6 +71,7 @@ function Register() {
 
     function googleLogin(e) {
         setIsLoaded(false)
+        setErr('')
         e.preventDefault()
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider).then((result) => {
@@ -83,9 +86,9 @@ function Register() {
         });
     }
     return (
-        (isLoaded)?
 
         <div className="container-out">
+           { (isLoaded)?
             <div className="innerBox">
 
                 <h1 className='heading'> Register Yourself </h1>
@@ -123,11 +126,11 @@ function Register() {
                     </div>
                 </form>
 
-            </div>
+            </div> :<i className='fa fa-spinner fa-spin'></i>}
 
         </div>
 
-            :<i className='fa fa-spinner fa-spin'></i>
+
     )
 }
 

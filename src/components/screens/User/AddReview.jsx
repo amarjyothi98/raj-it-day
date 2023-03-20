@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import Screen from './reviewScreens/Screen'
 import { db, auth } from '../../constants/firebase'
 import { collection, addDoc } from '@firebase/firestore'
-import { reload } from '@firebase/auth'
+import { useNavigate } from 'react-router-dom'
 function AddReview() {
+    const navigate=useNavigate()
     const [data, setData] = useState({})
     const option = [
 
@@ -62,8 +63,7 @@ function AddReview() {
             name: localStorage.getItem('appUser') + `${dt.getHours()}:${dt.getMinutes()}:${dt.getSeconds()}`,
             data: data
         }).then(e => {
-            alert("Successfully Added Review")
-            setIsLoaded(true)
+            navigate('/confirm')
         }).catch(err => {
             setErr(err.message)
             setIsLoaded(true)
