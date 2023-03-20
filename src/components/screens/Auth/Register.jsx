@@ -92,7 +92,7 @@ function Register() {
 
                 <form className='w-50 mx-auto'>
                     <div className="form-group container">
-                        <input required onChange={(e) => handleChange(e)} type="text" className="form-" name='name' id="exampleFormControlInput1" placeholder="Your Name" />
+                        <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name='name' id="exampleFormControlInput1" placeholder="Your Name" />
                     </div>
                     <div className="form-group container">
                         <input required onChange={(e) => handleChange(e)} type="email" className="form-control" name="email" id="exampleFormControlInput1" placeholder="Your Email" />

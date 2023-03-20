@@ -108,8 +108,13 @@
 
   .or { 
      margin: 0;
+     text-align: center;
   }
 
   .form-control  {
     width: 100%;
+  }
+
+  .heading {
+    text-align: center;
   }
