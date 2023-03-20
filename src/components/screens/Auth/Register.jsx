@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } f
 import { collection, ref, addDoc } from 'firebase/firestore'
 import { db } from '../../constants/firebase'
 import './auth.css'
-
+import { Link } from 'react-router-dom'
 function Register() {
     const [obj, setObj] = useState({
         email: '',
@@ -49,7 +49,7 @@ function Register() {
                     role: obj.role
                 }).then(e => {
                     alert("Welcome", obj.name);
-                    localStorage.setItem('appUser', obj.name)
+                    localStorage.setItem('appUser', JSON.stringify(obj))
                     setIsLoaded(true)
                 })
             })
@@ -93,7 +93,7 @@ function Register() {
 
                 <h1 className='heading'> Register Yourself </h1>
 
-                <form className='w-50 mx-auto'>
+                <form className='w-75 mx-auto'>
                     <div className="form-group container">
                         <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name='name' id="exampleFormControlInput1" placeholder="Your Name" />
                     </div>
@@ -120,7 +120,8 @@ function Register() {
 
                         <button onClick={handleSubmit} className='btn btn-primary w-100'>Register</button>
                         <p className='or' >or</p>
-                        <button onClick={googleLogin} className='btn btn-primary w-100 my-2'>Signup with Google</button>
+                        <button onClick={googleLogin} className='btn btn-primary w-100 my-2'><i className='fab mx-2 fa-google'></i>Signup with Google</button>
+                        <Link to="/login" className='text-center'>Already have an account</Link>
                         <p className="alert error">{err}</p>
 
                     </div>
