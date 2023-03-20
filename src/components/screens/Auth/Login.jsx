@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from '../../constants/firebase';
+import { auth, db } from '../../constants/firebase';
 import './auth.css'
 import { Link, useNavigate } from 'react-router-dom';
+import { collection, query, where,getDocs } from '@firebase/firestore';
+import { when } from 'q';
 
 function Login() {
     const [obj, setObj] = useState({
@@ -11,8 +13,8 @@ function Login() {
     })
 
     const [err, setErr] = useState('')
-    const [isLoaded,setIsLoaded]=useState(1)
-    const navigate=useNavigate()
+    const [isLoaded, setIsLoaded] = useState(1)
+    const navigate = useNavigate()
     function handleChange(event) {
         var k = obj
         k[event.target.name] = event.target.value
@@ -29,61 +31,47 @@ function Login() {
         }
         setIsLoaded(false)
         signInWithEmailAndPassword(auth, obj.email, obj.password)
-            .then((userCredential) => {
-                alert("Welcome", userCredential.user.name);
+            .then(async(userCredential) => {
+                const qw = query(collection(db, 'users'), where("email", '==', obj.email))
+
+                const querySnapshot = await getDocs(qw);
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.data())
+                    localStorage.setItem('appUser1', JSON.stringify({id:doc.id, data:doc.data()}))
+                });
+                navigate('/home')
                 setIsLoaded(true)
-                navigate('/details', {state:{google:false}})
-                localStorage.setItem('appUser', JSON.stringify(userCredential.user))
             })
             .catch((error) => {
-                setErr(error.message);
+                setErr(error.message.split('/')[error.message.split('/').length - 1])
                 setIsLoaded(true)
             });
     }
 
-
-
-    function googleLogin(e) {
-        e.preventDefault()
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider).then((result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            const user = result.user;
-            localStorage.setItem('appUser', JSON.stringify(user))
-            navigate('/details', {state:{google:true}})
-            alert(user.displayName)
-        }).catch((error) => {
-            setErr(`${error.message} by ${error.customData.email}`);
-        });
-    }
     return (
 
         <div className="container-out">
-            {(isLoaded) ?
-                <div className="innerBox">
+            <div className="innerBox">
 
-                    <h1 className='heading'> Login Now </h1>
+                <h1 className='heading'> Login Now </h1>
 
-                    <form className='w-75 mx-auto'>
-                        <div className="form-group container">
-                            <input required onChange={(e) => handleChange(e)} type="email" className="form-control" name="email" id="exampleFormControlInput1" placeholder="Email" />
-                        </div>
-                        <div className="form-group container">
-                            <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name='password' id="exampleFormControlInput1" placeholder="Password" />
-                        </div>
-                        <div className="footer">
+                <form className='w-75 mx-auto'>
+                    <div className="form-group container">
+                        <input required onChange={(e) => handleChange(e)} type="email" className="form-control" name="email" id="exampleFormControlInput1" placeholder="Email" />
+                    </div>
+                    <div className="form-group container">
+                        <input required onChange={(e) => handleChange(e)} type="password" className="form-control" name='password' id="exampleFormControlInput1" placeholder="Password" />
+                    </div>
+                    <div className="footer">
 
-                            <button onClick={handleSubmit} className='btn btn-primary w-100'>Log in</button>
-                            <p className='or' >or</p>
-                            <button onClick={googleLogin} className='btn btn-primary w-100 my-2'><i className='fab mx-2 fa-google'></i>Sign in with Google</button>
-                            <Link to="/register" className='text-center'>Don't have an account</Link>
-                            <p className="alert error">{err}</p>
+                        <button onClick={handleSubmit} className='btn btn-primary w-100'>{(isLoaded) ? 'Log in' : <i className='fa fa-spinner fa-spin'></i>}</button>
+                        <Link to="/register" className='text-center'>Register here</Link>
+                        <p className="alert error">{err}</p>
 
-                        </div>
-                    </form>
+                    </div>
+                </form>
 
-                </div> : <i className='fa fa-spinner fa-spin'></i>}
+            </div>
         </div>
     )
 }

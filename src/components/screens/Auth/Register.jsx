@@ -4,15 +4,18 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } f
 import { collection, ref, addDoc } from 'firebase/firestore'
 import { db } from '../../constants/firebase'
 import './auth.css'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
+
 function Register() {
+    const navigate=useNavigate()
     const [obj, setObj] = useState({
         email: '',
         password: '',
         name: '',
         uniqueCode: '',
         phone: '',
-        role: ''
+        role: '',
+        location:''
     })
 
     const [err, setErr] = useState('')
@@ -40,55 +43,34 @@ function Register() {
         setIsLoaded(false)
         createUserWithEmailAndPassword(auth, obj.email, obj.password)
             .then(async (userCredential) => {
-                await addDoc(collection(db, 'users'), {
-                    email: obj.email,
-                    password: obj.password,
-                    name: obj.name,
-                    uniqueCode: obj.uniqueCode,
-                    phone: obj.phone,
-                    role: obj.role
-                }).then(e => {
-                    alert("Welcome", obj.name);
-                    localStorage.setItem('appUser', JSON.stringify(obj))
+                await addDoc(collection(db, 'users'), {...obj}).then(e => {
+                    localStorage.setItem('appUser', JSON.stringify({id:'bd9weji2w29', data:obj}))
+                    setIsLoaded(true)
+                    navigate('/home')
+                }).catch(err=>{
+                    setErr(err.message)
                     setIsLoaded(true)
                 })
             })
             .catch((error) => {
-                setErr(error.message)
+                setErr(error.message.split('/')[error.message.split('/').length-1])
                 setObj({
                     email: '',
                     password: '',
                     name: '',
                     uniqueCode: '',
                     phone: '',
-                    role: ''
+                    role: '',
+                    location:''
                 })
                 setIsLoaded(true)
             });
     }
 
 
-
-    function googleLogin(e) {
-        setIsLoaded(false)
-        setErr('')
-        e.preventDefault()
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider).then((result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            const user = result.user;
-            alert(user.name)
-            setIsLoaded(true)
-        }).catch((error) => {
-            setErr(`${error.message} by ${error.customData.email}`);
-            setIsLoaded(true)
-        });
-    }
     return (
 
         <div className="container-out">
-           { (isLoaded)?
             <div className="innerBox">
 
                 <h1 className='heading'> Register Yourself </h1>
@@ -116,18 +98,19 @@ function Register() {
                     <div className="form-group container">
                         <input required onChange={(e) => handleChange(e)} type="password" className="form-control" name="password" id="exampleFormControlInput1" placeholder="Password" />
                     </div>
+                    <div className="form-group container">
+                        <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name="location" id="exampleFormControlInput1" placeholder="Location" />
+                    </div>
                     <div className="footer">
 
-                        <button onClick={handleSubmit} className='btn btn-primary w-100'>Register</button>
-                        <p className='or' >or</p>
-                        <button onClick={googleLogin} className='btn btn-primary w-100 my-2'><i className='fab mx-2 fa-google'></i>Signup with Google</button>
+                        <button onClick={handleSubmit} className='btn btn-primary w-100'>{ (isLoaded)?"Register":<i className='fa fa-spinner fa-spin'></i>}</button>
                         <Link to="/login" className='text-center'>Already have an account</Link>
                         <p className="alert error">{err}</p>
 
                     </div>
                 </form>
 
-            </div> :<i className='fa fa-spinner fa-spin'></i>}
+            </div>
 
         </div>
 

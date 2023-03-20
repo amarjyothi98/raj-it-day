@@ -11,7 +11,6 @@ import Loader from '../../constants/Loader';
 import { auth, db } from '../../constants/firebase';
 import ReviewCard from './ReviewCard';
 function Profile() {
-    const [data, setData] = useState(null)
     const [items, setItems] = useState(null)
     const [loaded, setLoaded] = useState(true)
     var w=JSON.parse(localStorage.getItem('appUser1'))
@@ -20,7 +19,7 @@ function Profile() {
 
     async function loadItems() {
         setLoaded(false)
-        const q = query(collection(db, "reviews"), where("uid", "==", `${auth.currentUser.uid}`));
+        const q = query(collection(db, "reviews"), where("from", "==", `${auth.currentUser.email}`));
 
         let data = []
         const querySnapshot = await getDocs(q);
@@ -61,7 +60,7 @@ function Profile() {
                 <label style={{ fontSize: '16px' }} className='my-2'>Reviews</label>
                 <div>
                     {
-                        (data != null) ? data.reviews.map(e => <ReviewCard data={e} />) : <p className='opacity-50 smallText my-1'>No Reviews</p>
+                        (items != null) ? items.map(e => <ReviewCard data={e} />) : <p className='opacity-50 smallText my-1'>No Reviews</p>
                     }
                 </div>
             </div>
