@@ -17,14 +17,14 @@ export default function Navbar() {
         <div class="nav-links" id="navLinks">
           <i class="fa fa-times" onclick={hideMenu()}></i>
           <ul>
-            <li><a href="">HOME</a></li>
-            <li><a href="">ABOUT</a></li>
-            <li><a href="">COURSE</a></li>
-            <li><a href="">BLOG</a></li>
-            <li><a href="">CONTACT</a></li>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#ABOUT">ABOUT</a></li>
+            <li><a href="#course">COURSE</a></li>
+            <li><a href="#blog">BLOG</a></li>
+            <li><a href="#contact">CONTACT</a></li>
           </ul>
         </div>
-        <i class="fa fa-bars" onclick="showMenu()"></i>
+        <i class="fa fa-bars" onClick={()=>showMenu()}></i>
       </nav>
     </>
   )

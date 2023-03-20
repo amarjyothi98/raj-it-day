@@ -61,7 +61,7 @@ export default function Home() {
 
       <div class="row">
         <div class="testimonial-col">
-          <img src="/turtle.jpg" className='test-img' />
+          <img src="/turtle.jpg" alt=' ' className='test-img' />
           <div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui rem ratione corrupti delectus quia commodi consequatur repudiandae, impedit et natus repellat itaque sequi. Similique sapiente dolore adipisci consequuntur, quis error?</p>
             <h3>Harshit Kandu</h3>
@@ -73,7 +73,7 @@ export default function Home() {
           </div>
         </div>
         <div class="testimonial-col">
-          <img src="/turtle.jpg" className='test-img' />
+          <img src="/turtle.jpg" alt=' ' className='test-img' />
           <div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui rem ratione corrupti delectus quia commodi consequatur repudiandae, impedit et natus repellat itaque sequi. Similique sapiente dolore adipisci consequuntur, quis error?</p>
             <h3>Priyankar Dutta</h3>
