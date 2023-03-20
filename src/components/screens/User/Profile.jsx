@@ -13,26 +13,14 @@ import ReviewCard from './ReviewCard';
 function Profile() {
     const [data, setData] = useState(null)
     const [items, setItems] = useState(null)
-    const [loaded, setLoaded] = useState(0)
+    const [loaded, setLoaded] = useState(true)
+    var w=JSON.parse(localStorage.getItem('appUser1'))
+    console.log(w)
 
-    async function loadData() {
-        setLoaded(false)
-        const docRef = doc(db, "profiles", `${auth.currentUser.uid}`);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
-            setData(docSnap.data())
-        } else {
-            console.log("No such document!");
-        }
-
-        setLoaded(true)
-    }
 
     async function loadItems() {
         setLoaded(false)
-        const q = query(collection(db, "gigs"), where("uid", "==", `${auth.currentUser.uid}`));
+        const q = query(collection(db, "reviews"), where("uid", "==", `${auth.currentUser.uid}`));
 
         let data = []
         const querySnapshot = await getDocs(q);
@@ -45,23 +33,21 @@ function Profile() {
         setLoaded(true)
     }
     useEffect(e => {
-        loadData()
         loadItems()
     }, [])
 
 
     return (
-        (loaded === true) ? <div className='bg-black' style={{ minHeight: '100vh' }}>
+        (loaded === true) ? <div className='text-black' style={{ minHeight: '100vh' }}>
+            <div className="d-flex w-75 mx-auto p-4 align-items-center">
+
             <div className='bg-custom' style={{ height: '20vh' }}>
                 <img
-                    className='profileBg'
-                    src="https://cdn.pixabay.com/photo/2017/07/03/20/17/colorful-2468874__480.jpg" alt="" />
-                <img
-                    className="profileDp"
+                    className="profileDp rounded-circle"
                     alt=""
                     src={auth.currentUser.photoURL} width={120} height={120} />
             </div>
-            <div className='text-end text-white px-2 py-2 col-11 mx-auto'>
+            <div className='text-end text-black px-2 py-2 col-11 mx-auto'>
                 <h3 className='my-1'>{auth.currentUser.displayName}</h3>
                 <div className='d-flex justify-content-end'>
                     <i className="fa fa-location-arrow mx-2 my-0"></i>
@@ -69,8 +55,9 @@ function Profile() {
                 </div>
                 <p>{auth.currentUser.email}</p>
             </div>
+            </div>
 
-            <div className='container text-white'>
+            <div className='container text-black'>
                 <label style={{ fontSize: '16px' }} className='my-2'>Reviews</label>
                 <div>
                     {
