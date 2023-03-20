@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../../constants/firebase';
 import './auth.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { collection, query, where,getDocs } from '@firebase/firestore';
-import { when } from 'q';
 
 function Login() {
     const [obj, setObj] = useState({
@@ -25,7 +24,7 @@ function Login() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        if (obj.email == '' || obj.password == '') {
+        if (obj.email === '' || obj.password === '') {
             alert("Both Details Required")
             return;
         }

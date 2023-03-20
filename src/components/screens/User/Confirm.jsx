@@ -1,5 +1,4 @@
 import React from 'react'
-import { useNavigation } from 'react-router'
 import { Link } from 'react-router-dom'
 import tick from '../../assets/check-mark-verified.gif'
 function Confirm() {

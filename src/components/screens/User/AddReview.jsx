@@ -78,10 +78,10 @@ function AddReview() {
             <div className='w-50 mx-auto'> 
             {/* {JSON.parse(localStorage.getItem('appUser')).data.name},  */}
                 <h3> We've some questions</h3>
-                {(active == 1) ? <Screen onChange={(e) => handleChange(e)} data={[option[0], option[1]]} active={1} setActive={(val) => setActive(val)} /> : null}
-                {(active == 2) ? <Screen onChange={(e) => handleChange(e)} data={[option[2], option[3]]} active={2} setActive={(val) => setActive(val)} /> : null}
-                {(active == 3) ? <Screen onChange={(e) => handleChange(e)} data={[option[4], option[5]]} active={3} setActive={(val) => setActive(val)} /> : null}
-                {(active == 4) ? <Screen onChange={(e) => handleChange(e)} data={[option[6], option[7]]} active={4} setActive={(val) => setActive(val)} /> : null}
+                {(active === 1) ? <Screen onChange={(e) => handleChange(e)} data={[option[0], option[1]]} active={1} setActive={(val) => setActive(val)} /> : null}
+                {(active === 2) ? <Screen onChange={(e) => handleChange(e)} data={[option[2], option[3]]} active={2} setActive={(val) => setActive(val)} /> : null}
+                {(active === 3) ? <Screen onChange={(e) => handleChange(e)} data={[option[4], option[5]]} active={3} setActive={(val) => setActive(val)} /> : null}
+                {(active === 4) ? <Screen onChange={(e) => handleChange(e)} data={[option[6], option[7]]} active={4} setActive={(val) => setActive(val)} /> : null}
                 {(active > 4) ? <p>Please Submit</p> : null}
                 <button disabled={active <= 4} className="btn btn-primary my-2 w-100" onClick={() => handleSubmit()}>Submit</button>
                 {err}

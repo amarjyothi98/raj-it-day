@@ -25,7 +25,7 @@ function Screen(props) {
 
       <button type='submit' className='btn btn-light' onClick={() => {
 
-        props.active != 1 ? props.setActive(props.active - 1) : alert("Can't go back")
+        props.active !== 1 ? props.setActive(props.active - 1) : alert("Can't go back")
 
       }}>Back</button>
       <button type='submit' className='btn btn-light' onClick={() => {
