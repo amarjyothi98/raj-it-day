@@ -1,12 +1,11 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
-import { useState } from "react";
 import PieChart from "./PieChart";
 import { Data } from "./data";
 Chart.register(CategoryScale);
 
 export default function App() {
-    const [chartData, setChartData] = useState({
+    const chartData={
         labels: Data.map((data) => data.year),
         datasets: [
             {
@@ -22,7 +21,7 @@ export default function App() {
                 borderWidth: 2
             }
         ]
-    })
+    }
 
 
     return(
