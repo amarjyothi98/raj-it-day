@@ -2,7 +2,7 @@ import React from 'react'
 
 function Screen(props) {
   return (
-    <div>
+    <form>
 
 
       {
@@ -10,9 +10,9 @@ function Screen(props) {
           return (
             <div>
               <label htmlFor="">{e.label}</label>
-              <select name={e.label} id="" onChange={props.onChange}>
+              <select name={e.label} id="" onChange={props.onChange} required>
                 {
-                  e.options.map(k=>{
+                  e.options.map(k => {
                     return <option value={k}>{k}</option>
                   })
                 }
@@ -22,9 +22,18 @@ function Screen(props) {
         })
       }
 
-      <button onClick={() => props.setActive(props.active + 1)}>Next</button>
+      <button type='submit' onClick={() => {
 
-    </div>
+        props.active != 1 ? props.setActive(props.active - 1) : alert("Can't go back")
+
+      }}>Back</button>
+      <button type='submit' onClick={() => {
+
+        props.setActive(props.active + 1)
+
+      }}>Next</button>
+
+    </form>
   )
 }
 

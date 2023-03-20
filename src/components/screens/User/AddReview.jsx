@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Screen from './reviewScreens/Screen'
 import { db, auth } from '../../constants/firebase'
 import { collection, addDoc } from '@firebase/firestore'
+import { reload } from '@firebase/auth'
 function AddReview() {
     const [data, setData] = useState({})
     const option = [
@@ -52,6 +53,7 @@ function AddReview() {
     var handleSubmit = async () => {
         if(!Object.keys(data).length){
             alert("Choose options please")
+            setActive(1)
             return;
         }
         setIsLoaded(false)
@@ -76,7 +78,7 @@ function AddReview() {
             {(active == 2) ? <Screen onChange={(e) => handleChange(e)} data={[option[2], option[3]]} active={2} setActive={(val) => setActive(val)} /> : null}
             {(active == 3) ? <Screen onChange={(e) => handleChange(e)} data={[option[4], option[5]]} active={3} setActive={(val) => setActive(val)} /> : null}
             {(active == 4) ? <Screen onChange={(e) => handleChange(e)} data={[option[6], option[7]]} active={4} setActive={(val) => setActive(val)} /> : null}
-            {(active>4)?<p>Thanks for Reviewing, Please Submit</p>:null}
+            {(active>4)?<p>Please Submit</p>:null}
             <button disabled={active <= 4} onClick={() => handleSubmit()}>Submit</button>
             {err}
         </div>:<i className='fa fa-spinner fa-spin'></i>
