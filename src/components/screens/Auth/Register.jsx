@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { auth } from '../../constants/firebase'
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from '@firebase/auth'
-import { collection, ref, addDoc } from 'firebase/firestore'
+import { createUserWithEmailAndPassword } from '@firebase/auth'
+import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../../constants/firebase'
 import './auth.css'
 import { Link,useNavigate } from 'react-router-dom'
@@ -36,7 +36,7 @@ function Register() {
             alert("Min 6 length Password Required")
             return;
         }
-        if (obj.phone.length != 10) {
+        if (obj.phone.length !== 10) {
             alert("Invalid Phone Number")
             return;
         }
