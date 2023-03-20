@@ -1,21 +1,15 @@
-import React from 'react'
+import React,{useState} from 'react'
 
 export default function Navbar() {
 
-    var navLinks = document.getElementById("navLinks");
-      function showMenu() {
-        navLinks.style.right = "0";
-      }
-      function hideMenu() {
-        navLinks.style.right = "-200px";
-      }
+      const [style,setStyle]=useState(0)
 
   return (
     <>
-    <nav>
+    <nav id="nav">
         <h2>FeedWell</h2>
-        <div class="nav-links" id="navLinks">
-          <i class="fa fa-times" onclick={hideMenu()}></i>
+        <div class="nav-links" id="navLinks" style={{right:`${style}px`}}>
+          <i class="fa fa-times" onclick={()=>setStyle(0)}></i>
           <ul>
             <li><a href="#home">HOME</a></li>
             <li><a href="#ABOUT">ABOUT</a></li>
@@ -24,7 +18,7 @@ export default function Navbar() {
             <li><a href="#contact">CONTACT</a></li>
           </ul>
         </div>
-        <i class="fa fa-bars" onClick={()=>showMenu()}></i>
+        <i class="fa fa-bars" onClick={()=>setStyle(-200)}></i>
       </nav>
     </>
   )
