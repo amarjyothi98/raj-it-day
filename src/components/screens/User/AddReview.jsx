@@ -53,9 +53,12 @@ function AddReview() {
     var [err, setErr] = useState('')
     var [isLoaded, setIsLoaded] = useState(1)
     var handleSubmit = async () => {
+        if(data['centre']===''){
+            setErr("Centre is Required!")
+            return;
+        }
         if (!Object.keys(data).length) {
-            alert("Choose options please")
-            setActive(1)
+            setErr("Choose options please")
             return;
         }
         setIsLoaded(false)
@@ -83,6 +86,7 @@ function AddReview() {
                 {(active === 2) ? <Screen onChange={(e) => handleChange(e)} data={[option[2], option[3]]} active={2} setActive={(val) => setActive(val)} /> : null}
                 {(active === 3) ? <Screen onChange={(e) => handleChange(e)} data={[option[4], option[5]]} active={3} setActive={(val) => setActive(val)} /> : null}
                 {(active === 4) ? <Screen onChange={(e) => handleChange(e)} data={[option[6], option[7]]} active={4} setActive={(val) => setActive(val)} /> : null}
+                {(active > 4) && <input placeholder='Centre Location'  className="form-control" onChange={(e)=>handleChange(e)} />}
                 {(active > 4) && <button  className="btn btn-primary my-2 w-100" onClick={() => handleSubmit()}>Submit</button>}
                 {err}
             </div>:<Loader/>}

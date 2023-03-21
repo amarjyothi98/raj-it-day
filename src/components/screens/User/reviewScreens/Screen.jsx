@@ -16,7 +16,7 @@ function Screen(props) {
                     return <option value={k}>{k}</option>
                   })
                 }
-              </select>:<input name={"review"} className='form-control my-1' onChange={props.onChange} placeholder='Answer' />}
+              </select>:<input name={"review"} className='form-control my-1' onChange={props.onChange} placeholder='Answer' required />}
             </div>
           )
         })

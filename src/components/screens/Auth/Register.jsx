@@ -13,7 +13,6 @@ function Register() {
         password: '',
         name: '',
         uniqueCode: '',
-        phone: '',
         role: '',
         location:''
     })
@@ -36,10 +35,7 @@ function Register() {
             alert("Min 6 length Password Required")
             return;
         }
-        if (obj.phone.length !== 10) {
-            alert("Invalid Phone Number")
-            return;
-        }
+
         setIsLoaded(false)
         createUserWithEmailAndPassword(auth, obj.email, obj.password)
             .then(async (userCredential) => {
@@ -59,7 +55,6 @@ function Register() {
                     password: '',
                     name: '',
                     uniqueCode: '',
-                    phone: '',
                     role: '',
                     location:''
                 })
@@ -82,9 +77,7 @@ function Register() {
                     <div className="form-group container">
                         <input required onChange={(e) => handleChange(e)} type="email" className="form-control" name="email" id="exampleFormControlInput1" placeholder="Your Email" />
                     </div>
-                    <div className="form-group container">
-                        <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name="phone" id="exampleFormControlInput1" placeholder="Number" />
-                    </div>
+                    
                     
                     <div className="form-group container">
                         <input required onChange={(e) => handleChange(e)} type="text" name="uniqueCode" className="form-control" id="exampleFormControlInput1" placeholder="Your Unique ID" />
