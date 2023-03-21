@@ -24,10 +24,10 @@ export default function Home() {
     <>
       <Navbar />
 
-        <img className="d-block w-75 mx-auto mb-3" style={{ borderRadius: '50px' }} src="https://w.ndtvimg.com/sites/3/2019/12/04120239/malnutrition-in-india-660.png" alt="First slide" />
-      <section className='w-75 mx-auto d-flex justify-content-center align-items-center' id='home' style={{height:'100vh'}}>
+      <section className='course' id='home' >
 
       <div>
+        <img className="d-block w-75 mx-auto mb-3" style={{ borderRadius: '50px' }} src="https://w.ndtvimg.com/sites/3/2019/12/04120239/malnutrition-in-india-660.png" alt="First slide" />
 
         <h1>What is Malnutrition?</h1>
         <p>Malnutrition is the condition that develops when the body is deprived of vitamins, minerals and other nutrients it needs to maintain healthy tissues and organ function. Malnutrition occurs in people who are either undernourished or overnourished.</p>
@@ -56,11 +56,11 @@ export default function Home() {
       </div>
 
       </section>
-      <section className='w-75 mx-auto d-flex justify-content-center align-items-center' id='about' style={{height:'100vh'}}>
+      <section className='w-75 mx-auto d-flex justify-content-center align-items-center' id='about'>
         <div>
 
       <h3>About</h3>
-        <p className='text-justify' style={{lineHeight:2.2}}>Malnutrition is a serious problem that affects millions of people around the world. It can lead to a wide range of health problems, from stunted growth and cognitive development in children to weakened immune systems and chronic diseases in adults. That's why we created our web app, a powerful tool designed to help fight malnutrition and improve the health and well-being of people everywhere.
+        <p className='text-justify home-about' style={{lineHeight:2.2}}>Malnutrition is a serious problem that affects millions of people around the world. It can lead to a wide range of health problems, from stunted growth and cognitive development in children to weakened immune systems and chronic diseases in adults. That's why we created our web app, a powerful tool designed to help fight malnutrition and improve the health and well-being of people everywhere.
 
           Our app is packed with features and resources to help you understand and combat malnutrition. From detailed nutritional information on thousands of foods to personalized meal plans and recipes, we've got everything you need to make informed decisions about your diet and take control of your health.
 
