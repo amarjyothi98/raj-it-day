@@ -1,10 +1,17 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import image1 from '../../assets/addReview.png'
 import image2 from '../../assets/seeData.png'
 import { useNavigate } from 'react-router-dom'
+import { auth } from '../../constants/firebase'
 function UserHome() {
     const navigate=useNavigate()
+    useEffect(e=>{
+        if(auth.currentUser==null){
+            navigate('/login')
+        }
+        console.log(auth)
+    },[])
     return (
         <div className='d-flex align-items-center justify-content-between w-100 bgimage' style={{ height: '100vh'}}>
             <div className='row justify-content-between w-100'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../../constants/firebase';
 import './auth.css'
@@ -21,11 +21,17 @@ function Login() {
         console.log(obj)
     }
 
+    useEffect(e=>{
+        setTimeout(()=>{
+            setErr("")
+        },3000)
+    },[err])
+
 
     function handleSubmit(e) {
         e.preventDefault()
         if (obj.email === '' || obj.password === '') {
-            alert("Both Details Required")
+            setErr("Both Details Required")
             return;
         }
         setIsLoaded(false)
@@ -49,8 +55,8 @@ function Login() {
 
     return (
 
-        <div className="container-out">
-            <div className="innerBox">
+        <div className="d-flex justify-content-center align-items-center bg-black" style={{height:'100vh'}}>
+            <div className="col-lg-4 bg-white px-2 py-3 rounded col-10 mx-auto">
 
                 <h1 className='heading'> Login Now </h1>
 
@@ -65,7 +71,7 @@ function Login() {
 
                         <button onClick={handleSubmit} className='btn btn-primary w-100'>{(isLoaded) ? 'Log in' : <i className='fa fa-spinner fa-spin'></i>}</button>
                         <Link to="/register" className='text-center'>Register here</Link>
-                        <p className="alert error">{err}</p>
+                        <p className="alert error my-0 py-0">{err}</p>
 
                     </div>
                 </form>

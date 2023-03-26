@@ -4,12 +4,12 @@ import './footer.css'
 export default function Footer() {
   return (
     <>
-    <div className="card text-center">
+      <div className="text-center p-3 border-top">
 
-  <div className="card-footer text-muted">
-    FeedWell
-  </div>
-</div>
+        <div className=" text-muted">
+          FeedWell
+        </div>
+      </div>
     </>
   )
 }

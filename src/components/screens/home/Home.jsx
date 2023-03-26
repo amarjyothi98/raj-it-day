@@ -5,6 +5,7 @@ import Footer from '../../footer/Footer'
 import Navbar from '../../navbar/Navbar'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../constants/firebase'
+import helpers from '../../assets/helpers.png'
 export default function Home() {
   var [data, setData] = useState([])
   useEffect(e => {
@@ -25,50 +26,43 @@ export default function Home() {
       <Navbar />
 
       <section className='course' id='home' >
+          <img className="d-block mx-auto w-100 mb-3 " style={{ borderRadius: '20px' }} src="https://w.ndtvimg.com/sites/3/2019/12/04120239/malnutrition-in-india-660.png" alt="First slide" />
 
-      <div>
-        <img className="d-block w-75 mx-auto mb-3" style={{ borderRadius: '50px' }} src="https://w.ndtvimg.com/sites/3/2019/12/04120239/malnutrition-in-india-660.png" alt="First slide" />
-
-        <h1>What is Malnutrition?</h1>
-        <p>Malnutrition is the condition that develops when the body is deprived of vitamins, minerals and other nutrients it needs to maintain healthy tissues and organ function. Malnutrition occurs in people who are either undernourished or overnourished.</p>
-        <div className="row">
-          <div className="course-col">
-            <h3>Causes</h3>
-            <p>The possible causes of malnutrition could be unsuitable dietary choices
-              ,having a low income
-              ,difficulty obtaining food
-              ,various physical and mental health conditions</p>
-          </div>
-          <div className="course-col">
-            <h3>Symptoms</h3>
-            <p>weight loss, a lack of appetite or interest in food or drink, tiredness and irritability, an inability to concentrate, always feeling cold, depression, getting sick and taking longer to heal
-              longer healing time for wounds</p>
-          </div>
-          <div className="course-col">
-            <h3>Treatment</h3>
-            <p>ongoing screening and monitoring
-              making a dietary plan, which might include taking supplements
-              treating specific symptoms,any infections that may be present
-              checking for any mouth or swallowing problems
-              suggesting alternative eating utensils</p>
-          </div>
-        </div>
-      </div>
-
-      </section>
-      <section className='w-75 mx-auto d-flex justify-content-center align-items-center' id='about'>
         <div>
 
-      <h3>About</h3>
-        <p className='text-justify home-about' style={{lineHeight:2.2}}>Malnutrition is a serious problem that affects millions of people around the world. It can lead to a wide range of health problems, from stunted growth and cognitive development in children to weakened immune systems and chronic diseases in adults. That's why we created our web app, a powerful tool designed to help fight malnutrition and improve the health and well-being of people everywhere.
+          <h1>What is Malnutrition?</h1>
+          <p>Malnutrition is the condition that develops when the body is deprived of vitamins, minerals and other nutrients it needs to maintain healthy tissues and organ function. Malnutrition occurs in people who are either undernourished or overnourished.</p>
+          <div className="row">
+            <div className="course-col">
+              <h3>Causes</h3>
+              <p>The possible causes of malnutrition could be unsuitable dietary choices
+                ,having a low income
+                ,difficulty obtaining food
+                ,various physical and mental health conditions</p>
+            </div>
+            <div className="course-col">
+              <h3>Symptoms</h3>
+              <p>weight loss, a lack of appetite or interest in food or drink, tiredness and irritability, an inability to concentrate, always feeling cold, depression, getting sick and taking longer to heal
+                longer healing time for wounds</p>
+            </div>
+            <div className="course-col">
+              <h3>Treatment</h3>
+              <p>ongoing screening and monitoring
+                making a dietary plan, which might include taking supplements
+                treating specific symptoms,any infections that may be present
+                checking for any mouth or swallowing problems
+                suggesting alternative eating utensils</p>
+            </div>
+          </div>
+        </div>
 
-          Our app is packed with features and resources to help you understand and combat malnutrition. From detailed nutritional information on thousands of foods to personalized meal plans and recipes, we've got everything you need to make informed decisions about your diet and take control of your health.
+      </section>
+      <section className='col-10 mx-auto ' id='about'>
 
-          With our app, you can easily track your daily nutrient intake and monitor your progress over time. Our intuitive interface makes it easy to input your food choices and see exactly how they contribute to your overall nutrition. Plus, our app is constantly updated with the latest research and recommendations, so you can be sure you're getting the most up-to-date information and advice.
-
-          But our app isn't just about tracking your diet – it's also about connecting with others who are fighting malnutrition and sharing your experiences and insights. Our community forum is a great place to ask questions, share tips, and find support from others who are on the same journey as you.
-
-          Whether you're looking to improve your own health or help others who are struggling with malnutrition, our web app is the perfect tool to get started. With its wealth of resources, powerful tracking features, and supportive community, you'll have everything you need to make a real difference in the fight against malnutrition. So why wait? Sign up today and start taking control of your health!</p>
+        <h3>People who helped us save</h3>
+        <div className='d-flex flex-lg-row flex-column justify-content-center align-items-center '>
+          <img src={helpers} alt="" className='col-lg-4 col-8 mx-auto' />
+          <p className='text-center home-about col-lg-8 col-10 mx-auto' style={{ lineHeight: 2.2 }}>The internship scheme in Anganwadi is a program that allows students, volunteers, and individuals to participate in activities aimed at eradicating malnutrition in the community. Anganwadi centers are government-run centers that provide basic health care, nutrition, and education services to children under six years of age, pregnant women, and lactating mothers. The internship scheme in Anganwadi is designed to give individuals practical experience in running and managing nutrition programs, conducting community outreach, and implementing health and hygiene practices. By participating in this scheme, individuals can contribute to reducing malnutrition in the community and gain valuable skills and knowledge in the process. Through this scheme, Anganwadi centers are better equipped to provide holistic care and support to vulnerable populations, ensuring that children and mothers receive adequate nutrition and care for their healthy growth and development.</p>
         </div>
       </section>
       <section className="testimonials" id="review">
@@ -91,7 +85,7 @@ export default function Home() {
             })
           }
         </div>
-        <Link to="/login" className=''><p className='btn btn-warning'>Want to Add Yours, Click here</p></Link>
+        <Link to="/login" className=''><p className='btn btn-outline-dark'>Want to Add Yours, Click here</p></Link>
 
       </section>
 
