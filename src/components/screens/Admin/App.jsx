@@ -1,16 +1,29 @@
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import PieChart from "./PieChart";
-import { Data } from "./data";
 Chart.register(CategoryScale);
 
-export default function App({title}) {
-    const chartData={
-        labels: Data.map((data) => data.year),
+export default function App({ title, metrics }) {
+    const Data = [];
+
+    Object.keys(metrics).map((param, index) => {
+        return Data.push({
+            id: index,
+            param: param,
+            totalResponses: metrics[param]
+        })
+    })
+
+    console.log(Data)
+
+
+
+    const chartData = {
+        labels: Data.map((data) => data.param),
         datasets: [
             {
-                label: "Review Feebacks",
-                data: Data.map((data) => data.userGain),
+                label: "Total Responses",
+                data: Data.map((data) => data.totalResponses),
                 backgroundColor: [
                     "rgba(75,192,192,1)",
                     "#50AF95",
@@ -24,7 +37,7 @@ export default function App({title}) {
     }
 
 
-    return(
-        <PieChart chartData={chartData} title={title}/>
+    return (
+        <PieChart chartData={chartData} title={title} />
     )
 }

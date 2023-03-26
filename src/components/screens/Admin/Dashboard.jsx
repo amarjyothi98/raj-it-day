@@ -6,30 +6,27 @@ import { db, auth } from '../../constants/firebase';
 import { collection, getDocs } from '@firebase/firestore';
 import { Link, useNavigate } from 'react-router-dom';
 import { option } from '../../constants/options';
+import Loader from '../../constants/Loader';
 
 function Dashboard() {
 
     const navigate = useNavigate()
     const [data, setData] = useState([])
     const [selectedOption, setOptionSelected]=useState('')
-
+    const [metrics, setMetrics]=useState({})
+    const [isLoaded,setLoaded]=useState(true)
     var newOptions=[{label:"Choose a Question"},...option]
     useEffect(e => {
+        setLoaded(false)
         async function loadReviews() {
             const querySnapshot = await getDocs(collection(db, "reviews"));
             let data1 = []
             querySnapshot.forEach((doc) => {
                 data1.push(doc.data())
-                console.log(doc.data())
             });
 
-
-            let obj = {
-                total: 0,
-            }
-            obj.total = data1.length
-
-            setData(obj)
+            setData(data1)
+    
         }
         // if(auth.currentUser==null){
         //     navigate('/login')
@@ -37,14 +34,28 @@ function Dashboard() {
         // console.log(auth)
 
         loadReviews()
+        setLoaded(true)
     }, [])
+    
+    function calcValues(question){
+        let obj={}
+        data.map(review=>{
+            if(!obj[review.data[question]]){
+                obj[review.data[question]]=1
+            }else{
+                obj[review.data[question]]+=1
+            }
+        })
 
+        setMetrics(obj)
+
+    }
     useEffect(e=>{
-
+        calcValues(selectedOption)
     },[selectedOption])
 
     return (
-        <div className='container' style={{ height: '100vh' }}>
+        (isLoaded)?<div className='container' style={{ height: '100vh' }}>
             <div className='px-3 py-2 bg-light d-flex justify-content-between align-items-center'>
                 <div className='d-flex justify-content-center my-2 align-items-center'>
                     <i className='fa fa-angle-left mx-2' onClick={()=>navigate('/home')}></i>
@@ -53,15 +64,14 @@ function Dashboard() {
                 <Link to="/allreviews">View All Reviews</Link>
             </div>
             <select name="" onChange={(e)=>setOptionSelected(e.target.value)} className='p-2 border rounded' id="">
-                {newOptions.map(e=>{
-                    return <option style={{display:(e.label=="Choose a Question")?"none":""}} value={e.label}>{e.label}</option>
+                {newOptions.map((e,index)=>{
+                    return <option key={index} style={{display:(e.label=="Choose a Question")?"none":""}} value={e.label}>{e.label}</option>
                 })}
             </select>
             <div id="app" className='w-25 mx-auto'>
-                {selectedOption?<App title={selectedOption} />:null}
+                {selectedOption?<App title={selectedOption} metrics={metrics} />:null}
             </div>
-
-        </div>
+        </div>:<Loader />
     )
 }
 
