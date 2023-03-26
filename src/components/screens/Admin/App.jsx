@@ -4,7 +4,7 @@ import PieChart from "./PieChart";
 import { Data } from "./data";
 Chart.register(CategoryScale);
 
-export default function App() {
+export default function App({title}) {
     const chartData={
         labels: Data.map((data) => data.year),
         datasets: [
@@ -25,6 +25,6 @@ export default function App() {
 
 
     return(
-        <PieChart chartData={chartData}/>
+        <PieChart chartData={chartData} title={title}/>
     )
 }
