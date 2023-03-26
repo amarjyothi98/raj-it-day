@@ -9,9 +9,7 @@ function PieChart({ chartData, title }) {
       <Pie
         data={chartData}
         options={{
-          plugins: {
-            
-          }
+          responsive:true
         }}
       />
     </div>

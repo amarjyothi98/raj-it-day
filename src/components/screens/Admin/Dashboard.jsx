@@ -55,11 +55,11 @@ function Dashboard() {
     },[selectedOption])
 
     return (
-        (isLoaded)?<div className='container' style={{ height: '100vh' }}>
-            <div className='px-3 py-2 bg-light d-flex justify-content-between align-items-center'>
+        (isLoaded)?<div className='d-flex justify-content-center align-items-center' style={{ height: '100vh' }}>
+            {(data.length)?<div><div className='px-3 py-2 d-flex justify-content-between align-items-center'>
                 <div className='d-flex justify-content-center my-2 align-items-center'>
                     <i className='fa fa-angle-left mx-2' onClick={()=>navigate('/home')}></i>
-                    <h5 className='my-0'>Total Reviews : {data.total}</h5>
+                    <h5 className='my-0'>Total Reviews : {data.length}</h5>
                 </div>
                 <Link to="/allreviews">View All Reviews</Link>
             </div>
@@ -68,9 +68,9 @@ function Dashboard() {
                     return <option key={index} style={{display:(e.label=="Choose a Question")?"none":""}} value={e.label}>{e.label}</option>
                 })}
             </select>
-            <div id="app" className='w-25 mx-auto'>
+            <div id="app" className='col-4 d-flex mx-auto'>
                 {selectedOption?<App title={selectedOption} metrics={metrics} />:null}
-            </div>
+            </div></div>:"No Reviews, Please check later"}
         </div>:<Loader />
     )
 }
