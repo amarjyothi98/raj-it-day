@@ -1,39 +1,52 @@
 export const option = [
 
     {
-        label: "How frequently, height & weight of childrens is measured at Anganbari?",
-        options: ['Choose a Option', 'Weekly', 'Monthly', 'quarterly', 'other']
+        label: "How was the overall quality of the food provided at the anganbadi center today?",
+        options: []
     },
     {
-        label: "Who creates health regulations, including nutritional ones?",
-        options: ['Choose a Option', 'State Funded Hospitals', 'Private Hospitals', 'Both']
+        label: "Did the food meet the required nutritional standards? If not, please provide details.",
+        options: []
     },
     {
-        label: "How do you set energy goals in critically challenged childrens?",
-        options: ['Choose a Option', 'All the time', 'Sometimes', 'Never']
+        label: "Was the food hygienically prepared and served?",
+        options: []
     },
     {
-        label: "How do you asses knowledge about nutrition of physicians, who visit anganbari? ",
-        options: ['Choose a Option', 'Good', 'Average', 'Poor']
+        label: "Were there any issues with the taste, texture, or appearance of the food? ",
+        options: []
     },
     {
-        label: "What problems you have faced in anganbari?",
-        options: ['Choose a Option', 'Irregularity in Distribution', 'Unhygenic Cooking Process', 'Bad Food Quality']
+        label: "Were there any issues with the quantity of food provided?",
+        options: []
     },
     {
-        label: "What's the condition of toilets in anganbari?",
-        options: ['Choose a Option', 'Clean', 'Unhygenic', 'No Proper Toilets']
+        label: "Were there any issues with the storage or handling of the food?",
+        options: []
     },
     {
-        label: "Drinking water provided to the students is",
-        options: ['Choose a Option', 'at normal pH Level', 'not properly disinfected', 'not free from contaminants']
+        label: "Were there any issues with the utensils or equipment used to prepare or serve the food?",
+        options: []
     },
     {
-        label: "Tell us about the food condition there?",
-        options: ['Choose a Option',]
+        label: "Were there any issues with the cleanliness of the eating area or kitchen?",
+        options: []
     },
     {
-        label: "Centre Name",
-        options: ['Choose a Option',]
+        label: "Did you observe any waste or spoilage of food?",
+        options: []
+    },
+    {
+        label: "Do you have any suggestions for improving the quality of the food at the anganbadi center?",
+        options: []
     },
 ]
+
+
+
+
+
+
+
+
+

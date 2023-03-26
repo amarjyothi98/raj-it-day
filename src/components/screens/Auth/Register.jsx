@@ -5,6 +5,7 @@ import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../../constants/firebase'
 import './auth.css'
 import { Link,useNavigate } from 'react-router-dom'
+import { langProvider, userLang } from '../../language/languageProvider'
 
 function Register() {
     const navigate=useNavigate()
@@ -12,9 +13,6 @@ function Register() {
         email: '',
         password: '',
         name: '',
-        uniqueCode: '',
-        role: '',
-        location:''
     })
 
     const [err, setErr] = useState('')
@@ -54,9 +52,6 @@ function Register() {
                     email: '',
                     password: '',
                     name: '',
-                    uniqueCode: '',
-                    role: '',
-                    location:''
                 })
                 setIsLoaded(true)
             });
@@ -68,30 +63,22 @@ function Register() {
         <div className="container-out">
             <div className="innerBox">
 
-                <h1 className='heading'> Register Yourself </h1>
+                <h1 className='heading'>{langProvider[userLang].register.heading1}</h1>
 
                 <form className='w-75 mx-auto'>
                     <div className="form-group container">
-                        <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name='name' id="exampleFormControlInput1" placeholder="Your Name" />
+                        <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name='name' id="exampleFormControlInput1" placeholder={langProvider[userLang].register.placeholder1} />
                     </div>
                     <div className="form-group container">
-                        <input required onChange={(e) => handleChange(e)} type="email" className="form-control" name="email" id="exampleFormControlInput1" placeholder="Your Email" />
-                    </div>
-                    
-                    
-                    <div className="form-group container">
-                        <input required onChange={(e) => handleChange(e)} type="text" name="uniqueCode" className="form-control" id="exampleFormControlInput1" placeholder="Your Unique ID" />
+                        <input required onChange={(e) => handleChange(e)} type="email" className="form-control" name="email" id="exampleFormControlInput1" placeholder={langProvider[userLang].register.placeholder2} />
                     </div>
                     <div className="form-group container">
-                        <input required onChange={(e) => handleChange(e)} type="password" className="form-control" name="password" id="exampleFormControlInput1" placeholder="Password" />
-                    </div>
-                    <div className="form-group container">
-                        <input required onChange={(e) => handleChange(e)} type="text" className="form-control" name="location" id="exampleFormControlInput1" placeholder="Location" />
+                        <input required onChange={(e) => handleChange(e)} type="password" className="form-control" name="password" id="exampleFormControlInput1" placeholder={langProvider[userLang].register.placeholder3} />
                     </div>
                     <div className="footer">
 
-                        <button onClick={handleSubmit} className='btn btn-primary w-100'>{ (isLoaded)?"Register":<i className='fa fa-spinner fa-spin'></i>}</button>
-                        <Link to="/login" className='text-center'>Already have an account</Link>
+                        <button onClick={handleSubmit} className='btn btn-primary w-100'>{ (isLoaded)?langProvider[userLang].register.btn1:<i className='fa fa-spinner fa-spin'></i>}</button>
+                        <Link to="/login" className='text-center'>{langProvider[userLang].register.link1}</Link>
                         <p className="alert error">{err}</p>
 
                     </div>

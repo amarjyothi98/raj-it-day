@@ -9,7 +9,7 @@ function AddReview() {
     
     const [data, setData] = useState({})
     const [isButtonDisabled, setButtonDisabled] = useState(false)
-
+    const [userLocation, setUserLocation]=useState('')
 
     var handleChange = (e) => {
         var k = data
@@ -17,12 +17,21 @@ function AddReview() {
         setData(k)
         console.log(data)
     }
+
+    const setLoc=(position)=>{
+        setUserLocation(`${position.coords.latitude},${position.coords.longitude}`)
+    }
     useEffect(e=>{
         if(auth.currentUser==null){
             navigate('/login')
         }
         console.log(auth)
+
+        navigator.geolocation.getCurrentPosition(setLoc)
     },[])
+
+
+
 
     var [isLoaded, setIsLoaded] = useState(1)
     var handleSubmit = async (e) => {
@@ -48,7 +57,8 @@ function AddReview() {
                 name: auth.currentUser.displayName || "test",
                 from: auth.currentUser.email || "test@gmail.com",
                 date: dt.toDateString(),
-                data: data
+                data: data,
+                location:userLocation
             }).then(e => {
                 navigate('/confirm')
             }).catch(err => {
@@ -60,13 +70,11 @@ function AddReview() {
         }
     }
     return (
-        <div className='d-flex align-items-center text-center' style={{ height: '100vh' }}>
+        <div className='d-flex align-items-center text-center bg-primary' style={{ height: '100vh' }}>
             {
-                <div className='w-50 mx-auto' style={{ height: '80vh', overflowY: 'scroll' }}>
+                <div className='w-50 mx-auto bg-white p-3 rounded' style={{ height: '80vh', overflowY: 'scroll' }}>
                     <h3> We've some questions</h3>
                     <form>
-
-
                         {
                             option.map(e => {
                                 return (
