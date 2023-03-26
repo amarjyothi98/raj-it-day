@@ -24,25 +24,33 @@ function Login() {
     useEffect(e=>{
         setTimeout(()=>{
             setErr("")
-        },3000)
+        },6000)
     },[err])
 
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        if (obj.email === '' || obj.password === '') {
+    useEffect(e=>{
+        if(localStorage.getItem('appUser')!=null){
+            var user=JSON.parse(localStorage.getItem('appUser'))
+            handleSubmit(user.data.email, user.data.password)
+        }
+    },[])
+
+
+    function handleSubmit(email,password) {
+        console.log(email,password)
+        if (email === '' || password === '') {
             setErr("Both Details Required")
             return;
         }
         setIsLoaded(false)
-        signInWithEmailAndPassword(auth, obj.email, obj.password)
+        signInWithEmailAndPassword(auth, email, password)
             .then(async(userCredential) => {
                 const qw = query(collection(db, 'users'), where("email", '==', obj.email))
 
                 const querySnapshot = await getDocs(qw);
                 querySnapshot.forEach((doc) => {
                     console.log(doc.data())
-                    localStorage.setItem('appUser1', JSON.stringify({id:doc.id, data:doc.data()}))
+                    localStorage.setItem('appUser', JSON.stringify({id:doc.id, data:doc.data()}))
                 });
                 navigate('/home')
                 setIsLoaded(true)
@@ -69,7 +77,7 @@ function Login() {
                     </div>
                     <div className="footer">
 
-                        <button onClick={handleSubmit} className='btn btn-primary w-100'>{(isLoaded) ? 'Log in' : <i className='fa fa-spinner fa-spin'></i>}</button>
+                        <button type='button' onClick={()=>handleSubmit(obj.email, obj.password)} className='btn btn-primary w-100'>{(isLoaded) ? 'Log in' : <i className='fa fa-spinner fa-spin'></i>}</button>
                         <Link to="/register" className='text-center'>Register here</Link>
                         <p className="alert error my-0 py-0">{err}</p>
 

@@ -42,7 +42,7 @@ function Register() {
                 await addDoc(collection(db, 'users'), {...obj}).then(e => {
                     localStorage.setItem('appUser', JSON.stringify({id:'bd9weji2w29', data:obj}))
                     setIsLoaded(true)
-                    navigate('/home')
+                    navigate('/login')
                 }).catch(err=>{
                     setErr(err.message)
                     setIsLoaded(true)

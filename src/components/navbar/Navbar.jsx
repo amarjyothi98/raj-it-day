@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { auth } from '../constants/firebase'
 export default function Navbar() {
 
   const [style, setStyle] = useState(-200)
@@ -17,7 +18,7 @@ export default function Navbar() {
             <li style={{ fontSize: '20px' }}><a href="#about">ABOUT</a></li>
             <li style={{ fontSize: '20px' }}><a href="#review">REVIEW</a></li>
 
-           <Link to="/Login"><button className='btn btn-dark'>Log in</button></Link>
+           <Link to={(auth.currentUser)?"/home":"/Login"}><button className='btn btn-dark'>{(auth.currentUser)?"Go Home":"Log in"}</button></Link>
           </ul>
         </div>
         <i className="fa fa-bars text-dark" onClick={() => setStyle(0)}></i>
