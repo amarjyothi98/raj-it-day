@@ -29,10 +29,10 @@ function Dashboard() {
             setLoaded(true)
     
         }
-        // if(auth.currentUser==null){
-        //     navigate('/login')
-        // }
-        // console.log(auth)
+        if(auth.currentUser==null){
+            navigate('/login')
+        }
+        console.log(auth)
 
         loadReviews()
     }, [])
@@ -61,7 +61,7 @@ function Dashboard() {
                     <i className='fa fa-angle-left mx-2' onClick={()=>navigate('/home')}></i>
                     <h5 className='my-0'>Total Reviews : {data.length}</h5>
                 </div>
-                <Link to="/allreviews">View All Reviews</Link>
+                <Link to="/allreviews">View People Suggestions</Link>
             </div>
             <select name="" onChange={(e)=>setOptionSelected(e.target.value)} className='p-2 border rounded' id="">
                 {newOptions.map((e,index)=>{

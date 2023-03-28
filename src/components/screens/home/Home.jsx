@@ -72,7 +72,7 @@ export default function Home() {
               return (
                 (count < 2) ? <div className="testimonial-col">
                   <div>
-                    <p>{obj.data['Tell us about the food condition there?']}</p>
+                    <p>{obj.data['Do you have any suggestions for improving the quality of the food at the anganbadi center?']}</p>
                     <h3>{obj.name}</h3>
                     <p>{obj.date}</p>
                   </div>

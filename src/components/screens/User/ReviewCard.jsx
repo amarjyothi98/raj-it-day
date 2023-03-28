@@ -1,15 +1,15 @@
 import React from 'react'
 
-function ReviewCard({data}) {
+function ReviewCard({data, styleClass}) {
   return (
-    <div className='container col-5'>
-        <div className='border rounded px-3 py-1'>
-            <p className='my-1 text-dark'>{data['Tell us about the food condition there?']}</p>
-            <div className='d-flex' style={{opacity:0.6}}>
+    <div className={`${styleClass}`}>
+        <div className='card border text-dark rounded px-3 py-1'>
+            <p className='my-1 '>{data.data['Do you have any suggestions for improving the quality of the food at the anganbadi center?']}</p>
+            <div className='d-flex card-footer'>
 
-            <p className='my-1 smallText'>- {data.name}</p>
-            <p className='my-1 smallText'>{data.date}</p>
-            <p className='my-1 smallText'>{data.location}</p>
+            <p className='my-1'>- {data.name}</p>
+            <p className='my-1'>{data.date}</p>
+            <p className='my-1'>{data.location}</p>
             </div>
         </div>
     </div>

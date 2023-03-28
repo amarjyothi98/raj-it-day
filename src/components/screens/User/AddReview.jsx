@@ -70,15 +70,15 @@ function AddReview() {
         }
     }
     return (
-        <div className='d-flex align-items-center text-center bg-primary' style={{ height: '100vh' }}>
+        <div className='d-flex align-items-center text-center bgimage' style={{ height: '100vh' }}>
             {
-                <div className='w-50 mx-auto bg-white p-3 rounded' style={{ height: '80vh', overflowY: 'scroll' }}>
-                    <h3> We've some questions</h3>
+                <div className='w-50 mx-auto p-3 rounded' style={{ height: '80vh', overflowY: 'scroll' }}>
+                    <h3 className='text-black'> We've some questions</h3>
                     <form>
                         {
                             option.map(e => {
                                 return (
-                                    <div className='bg-white rounded py-3 my-2 d-flex flex-wrap justify-content-between align-items-center'>
+                                    <div className='text-black rounded py-3 my-2 d-flex flex-wrap justify-content-between align-items-center'>
                                         <label htmlFor="" className='text-start'>{e.label}</label>
                                         {(e.options.length > 1) ? <select placeholder={e.label} name={e.label} id="" className='p-1 border rounded w-100 my-2' onChange={(e) => handleChange(e)} required={true}>
                                             {
@@ -91,7 +91,7 @@ function AddReview() {
                                 )
                             })
                         }
-                        <button className="btn btn-primary my-2 w-100" disabled={isButtonDisabled} onClick={(e) => handleSubmit(e)}>{(isLoaded)?"Submit":<i className='fa fa-spinner fa-spin text-white' />}</button>
+                        <button className="btn btn-warning my-2 w-100" disabled={isButtonDisabled} onClick={(e) => handleSubmit(e)}>{(isLoaded)?"Submit":<i className='fa fa-spinner fa-spin text-white' />}</button>
 
                     </form>
 
