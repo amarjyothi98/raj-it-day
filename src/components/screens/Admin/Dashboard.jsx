@@ -2,11 +2,10 @@
 import App from './App';
 
 import React, { useEffect, useState } from 'react'
-import { db, auth } from '../../constants/firebase';
+import { db } from '../../constants/firebase';
 import { collection, getDocs } from '@firebase/firestore';
 import { Link, useNavigate } from 'react-router-dom';
 import { option } from '../../constants/options';
-import Loader from '../../constants/Loader';
 
 function Dashboard() {
 
@@ -29,29 +28,27 @@ function Dashboard() {
             setLoaded(true)
     
         }
-        if(auth.currentUser==null){
-            navigate('/login')
-        }
-        console.log(auth)
 
         loadReviews()
     }, [])
     
-    function calcValues(question){
-        let obj={}
-        data.map(review=>{
-            if(!obj[review.data[question]]){
-                obj[review.data[question]]=1
-            }else{
-                obj[review.data[question]]+=1
-            }
-        })
-
-        setMetrics(obj)
-
-    }
-    useEffect(e=>{
+    useEffect((data1=data)=>{
+        function calcValues(question){
+            let obj={}
+            data1.map(review=>{
+                if(!obj[review.data[question]]){
+                    obj[review.data[question]]=1
+                }else{
+                    obj[review.data[question]]+=1
+                }
+                return true;
+            })
+    
+            setMetrics(obj)
+    
+        }
         calcValues(selectedOption)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[selectedOption])
 
     return (
@@ -63,9 +60,9 @@ function Dashboard() {
                 </div>
                 <Link to="/allreviews">View People Suggestions</Link>
             </div>
-            <select name="" onChange={(e)=>setOptionSelected(e.target.value)} className='p-2 border rounded' id="">
+            <select name="" onChange={(e)=>setOptionSelected(e.target.value)} className='p-2 w-100 border rounded' id="">
                 {newOptions.map((e,index)=>{
-                    return <option key={index} style={{display:(e.label=="Choose a Question")?"none":""}} value={e.label}>{e.label}</option>
+                    return <option key={index} style={{display:(e.label==="Choose a Question")?"none":""}} value={e.label}>{e.alias}</option>
                 })}
             </select>
             <div id="app" className='col-4 d-flex mx-auto'>
