@@ -27,11 +27,11 @@ function Login() {
             setErr("")
         }, 6000)
     }, [err])
-
+    var handleSubmit;
 
     useEffect(e => {
 
-        function handleSubmit(email, password) {
+        handleSubmit=(email, password)=>{
             console.log(email, password)
             if (email === '' || password === '') {
                 setErr("Both Details Required")
