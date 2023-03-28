@@ -27,38 +27,39 @@ function Login() {
             setErr("")
         }, 6000)
     }, [err])
-    var handleSubmit;
+
+
+    function handleSubmit(email, password) {
+        console.log(email, password)
+        if (email === '' || password === '') {
+            setErr("Both Details Required")
+            return;
+        }
+        setIsLoaded(false)
+        signInWithEmailAndPassword(auth, email, password)
+            .then(async (userCredential) => {
+                const qw = query(collection(db, 'users'), where("email", '==', obj.email))
+
+                const querySnapshot = await getDocs(qw);
+                querySnapshot.forEach((doc) => {
+                    console.log(doc.data())
+                    localStorage.setItem('appUser', JSON.stringify({ id: doc.id, data: doc.data() }))
+                });
+                navigate('/home')
+                setIsLoaded(true)
+            })
+            .catch((error) => {
+                setErr(error.message.split('/')[error.message.split('/').length - 1])
+                setIsLoaded(true)
+            });
+    }
 
     useEffect(e => {
-
-        handleSubmit=(email, password)=>{
-            console.log(email, password)
-            if (email === '' || password === '') {
-                setErr("Both Details Required")
-                return;
-            }
-            setIsLoaded(false)
-            signInWithEmailAndPassword(auth, email, password)
-                .then(async (userCredential) => {
-                    const qw = query(collection(db, 'users'), where("email", '==', obj.email))
-
-                    const querySnapshot = await getDocs(qw);
-                    querySnapshot.forEach((doc) => {
-                        console.log(doc.data())
-                        localStorage.setItem('appUser', JSON.stringify({ id: doc.id, data: doc.data() }))
-                    });
-                    navigate('/home')
-                    setIsLoaded(true)
-                })
-                .catch((error) => {
-                    setErr(error.message.split('/')[error.message.split('/').length - 1])
-                    setIsLoaded(true)
-                });
-        }
         if (localStorage.getItem('appUser') != null) {
             var user = JSON.parse(localStorage.getItem('appUser'))
             handleSubmit(user.data.email, user.data.password)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

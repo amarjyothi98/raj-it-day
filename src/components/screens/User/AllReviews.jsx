@@ -1,14 +1,12 @@
 import React,{useEffect,useState} from 'react'
 import ReviewCard from './ReviewCard'
-import { db, auth } from '../../constants/firebase';
+import { db} from '../../constants/firebase';
 import { collection, getDocs } from '@firebase/firestore';
-import { useNavigate } from 'react-router-dom';
 function AllReviews() {
     const [data, setData] = useState([])
     const [isLoaded,setLoaded]=useState(true)
 
 
-    const navigate=useNavigate()
 
     useEffect(e => {
         async function loadReviews() {
