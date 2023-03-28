@@ -22,10 +22,7 @@ function AddReview() {
         setUserLocation(`${position.coords.latitude},${position.coords.longitude}`)
     }
     useEffect(e=>{
-        if(auth.currentUser==null){
-            navigate('/login')
-        }
-        console.log(auth)
+
 
         navigator.geolocation.getCurrentPosition(setLoc)
     },[])
@@ -40,12 +37,13 @@ function AddReview() {
         option.map(e => {
             if (!data[e.label]) {
                 flag = true;
-                return;
+                return true;
             }
-            if (data[e.label] == '' || data[e.label] == 'Choose a Option') {
+            if (data[e.label] === '' || data[e.label] === 'Choose a Option') {
                 flag = true;
-                return;
+                return true;
             }
+            return true;
         })
         console.log("Flag is ", flag);
         if (!flag) {
@@ -83,7 +81,7 @@ function AddReview() {
                                         {(e.options.length > 1) ? <select placeholder={e.label} name={e.label} id="" className='p-1 border rounded w-100 my-2' onChange={(e) => handleChange(e)} required={true}>
                                             {
                                                 e.options.map(k => {
-                                                    return <option style={{ display: (k == 'Choose a Option') ? "none" : "" }} value={k}>{k}</option>
+                                                    return <option style={{ display: (k === 'Choose a Option') ? "none" : "" }} value={k}>{k}</option>
                                                 })
                                             }
                                         </select> : <input min={100} name={e.label} className='form-control my-1' onChange={(e) => handleChange(e)} placeholder={""} required />}

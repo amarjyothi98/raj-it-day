@@ -23,9 +23,6 @@ function AllReviews() {
             setLoaded(true)
     
         }
-        if(auth.currentUser==null){
-            navigate('/login')
-        }
 
         loadReviews()
     }, [])

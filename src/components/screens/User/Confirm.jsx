@@ -1,19 +1,12 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import tick from '../../assets/check-mark-verified.gif'
-import { auth } from '../../constants/firebase'
 function Confirm() {
     const navigate=useNavigate()
-    var navigateTimeout;
     useEffect(e=>{
-        navigateTimeout=setTimeout(e=>{
+        setTimeout(e=>{
             navigate('/dashboard')
         },5000)
-
-        if(auth.currentUser==null){
-            navigate('/login')
-        }
-        console.log(auth)
     },[])
 
     return (
@@ -25,9 +18,7 @@ function Confirm() {
                 <p className='w-50 mx-auto'>Thanks for giving us time. Your review is helpful to us. Information has been updated on our dashboard.</p>
             </div>
             <Link to="/addReview">
-            <button className='btn btn-primary' onClick={()=>{
-                clearTimeout(navigateTimeout)
-            }}>Add More Reviews</button>
+            <button className='btn btn-primary'>Add More Reviews</button>
             </Link>
             <p>You'll be redirected to Dashboard in 5 seconds</p>
             
